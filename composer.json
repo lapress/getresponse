@@ -1,0 +1,19 @@
+{
+    "name": "lapress/getresponse",
+    "description": "Get response newsletter client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Szczepanski",
+            "email": "sebastian@ably.pl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaPress\\GetResponse\\": "src/"
+        },
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
