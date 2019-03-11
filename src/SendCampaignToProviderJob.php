@@ -33,8 +33,10 @@ class SendCampaignToProviderJob implements ShouldQueue
      */
     public function handle()
     {
-//        app(Manager::class)->create($this->campaign);
+        app(Manager::class)->create($this->campaign);
 
-        $this->campaign->update(['status' => Campaign::STATUS_SENT]);
+        if ($this->campaign->status === Campaign::STATUS_DRAFT) {
+            $this->campaign->update(['status' => Campaign::STATUS_SENT]);
+        }
     }
 }
