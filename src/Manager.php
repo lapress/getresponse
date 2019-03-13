@@ -84,9 +84,7 @@ class Manager
      */
     public function getSenders(): Collection
     {
-        return collect($this->client->getFromFields())->filter(function ($sender){
-            return json_decode($sender->isActive) === true;
-        });
+        return collect($this->client->getFromFields());
     }
 
     /**

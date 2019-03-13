@@ -344,7 +344,7 @@ class Client
      */
     public function getFromFields()
     {
-        return $this->call('from-fields');
+        return $this->call('from-fields?perPage=300&query=mamstartup');
     }
 
     /**
