@@ -93,6 +93,13 @@ class Manager
      */
     public function create(Campaign $campaign)
     {
+        $now = Carbon::now()->addMinutes(2);
+        $sendOn = $now;
+
+        if ($campaign->sent_at && $campaign->sent_at->isFuture()) {
+            $sendOn = $campaign->sent_at;
+        }
+
         return $this->client->sendNewsletter([
             'name'         => $campaign->title,
             'subject'      => $campaign->title,
@@ -100,19 +107,19 @@ class Manager
             'campaign'     => [
                 'campaignId' => $campaign->provider_id,
             ],
-            'sendOn'       => $campaign->sent_at ?: Carbon::now(),
+            'sendOn'       => $sendOn->format('Y-m-d\TH:i:sO'),
             'fromField'    => [
-                'fromFieldId' => $campaign->sender
+                'fromFieldId' => $campaign->sender,
             ],
             'content'      => [
-                'html'  => stripcslashes($campaign->content),
+                'html'  => stripcslashes($campaign->body),
                 'plain' => null,
             ],
             'flags'        => ['openrate', 'clicktrack', 'google_analytics'],
             'sendSettings' => [
                 'selectedCampaigns' => [$campaign->provider_id],
-                'timeTravel'        => $campaign->time_travel,
-                'perfectTiming'     => $campaign->perfect_timing,
+                'timeTravel'        => (bool)$campaign->time_travel,
+                'perfectTiming'     => (bool)$campaign->perfect_timing,
             ],
         ]);
     }
