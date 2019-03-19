@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  * @author    Sebastian Szczepański
  * @copyright ably
  */
-class Campaign extends Model
+class NewsletterCampaign extends Model
 {
     protected $guarded = [];
+    protected $hidden = ['body'];
 
     const STATUS_DRAFT = 0;
     const STATUS_TESTED = 1;

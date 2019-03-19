@@ -12,16 +12,16 @@ class SendCampaignToProviderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     /**
-     * @var Campaign
+     * @var NewsletterCampaign
      */
     private $campaign;
 
     /**
      * Create a new job instance.
      *
-     * @param Campaign $campaign
+     * @param NewsletterCampaign $campaign
      */
-    public function __construct(Campaign $campaign)
+    public function __construct(NewsletterCampaign $campaign)
     {
         $this->campaign = $campaign;
     }
@@ -35,8 +35,8 @@ class SendCampaignToProviderJob implements ShouldQueue
     {
         app(Manager::class)->create($this->campaign);
 
-        if ($this->campaign->status === Campaign::STATUS_DRAFT) {
-            $this->campaign->update(['status' => Campaign::STATUS_SENT]);
+        if ($this->campaign->status === NewsletterCampaign::STATUS_DRAFT) {
+            $this->campaign->update(['status' => NewsletterCampaign::STATUS_SENT]);
         }
     }
 }

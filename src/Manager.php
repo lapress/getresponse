@@ -88,10 +88,10 @@ class Manager
     }
 
     /**
-     * @param Campaign $campaign
+     * @param NewsletterCampaign $campaign
      * @return mixed
      */
-    public function create(Campaign $campaign)
+    public function create(NewsletterCampaign $campaign)
     {
         $now = Carbon::now()->addMinutes(2);
         $sendOn = $now;
