@@ -3,6 +3,7 @@
 namespace LaPress\GetResponse;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\BinaryUuid\HasBinaryUuid;
 
 /**
  * @author    Sebastian Szczepański
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NewsletterCampaign extends Model
 {
+    use HasBinaryUuid;
+
     protected $guarded = [];
     protected $hidden = ['body'];
 

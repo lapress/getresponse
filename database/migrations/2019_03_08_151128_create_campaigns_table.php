@@ -14,17 +14,21 @@ class CreateCampaignsTable extends Migration
     public function up()
     {
         Schema::create('newsletter_campaigns', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('uuid');
+            $table->primary('uuid');
+
             $table->string('title')->nullable();
             $table->text('intro')->nullable();
-            $table->mediumText('body')->nullable();
-
             $table->tinyInteger('status')->default(0);
             $table->string('sender')->nullable();
             $table->string('provider_name')->nullable();
             $table->string('provider_id')->nullable();
             $table->unsignedInteger('sender_id')->nullable();
+            $table->boolean('perfect_timing')->default(false);
+            $table->boolean('time_travel')->default(false);
+            $table->string('vars')->nullable();
             $table->string('key');
+
             $table->timestamps();
         });
     }

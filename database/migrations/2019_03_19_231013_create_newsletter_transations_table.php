@@ -14,10 +14,11 @@ class CreateNewsletterTransationsTable extends Migration
     public function up()
     {
         Schema::create('newsletter_transactions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('uuid');
+            $table->primary('uuid');
+
             $table->unsignedInteger('newsletter_campaign_id')->index();
-            $table->boolean('perfect_timing')->default(false);
-            $table->boolean('time_travel')->default(false);
+            $table->unsignedInteger('provider_campaign_id')->index();
             $table->string('provider_id');
             $table->boolean('test')->default(true);
             $table->string('provider_status')->nullable();
