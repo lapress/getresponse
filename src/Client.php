@@ -133,6 +133,22 @@ class Client
     }
 
     /**
+     * @param string $id
+     */
+    public function getNewsletter(string $id)
+    {
+        return $this->call('newsletters/'.$id, 'GET', null);
+    }
+
+    /**
+     * @param string $id
+     */
+    public function getNewsletterStatistics(string $id)
+    {
+        return $this->call('newsletters/'.$id.'/statistics', 'GET', null);
+    }
+
+    /**
      * @param $params
      * @return mixed
      */

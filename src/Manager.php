@@ -123,4 +123,14 @@ class Manager
             ],
         ]);
     }
+
+    public function getNewsletterStatistics($newsletterId)
+    {
+        return $this->client->getNewsletterStatistics($newsletterId);
+    }
+
+    public function get($newsletterId)
+    {
+        return $this->client->getNewsletter($newsletterId);
+    }
 }

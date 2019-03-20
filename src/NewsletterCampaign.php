@@ -3,7 +3,6 @@
 namespace LaPress\GetResponse;
 
 use App\Models\Post;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\BinaryUuid\HasBinaryUuid;
 
