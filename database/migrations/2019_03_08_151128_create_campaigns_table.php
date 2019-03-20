@@ -26,7 +26,9 @@ class CreateCampaignsTable extends Migration
             $table->unsignedInteger('sender_id')->nullable();
             $table->boolean('perfect_timing')->default(false);
             $table->boolean('time_travel')->default(false);
-            $table->string('vars')->nullable();
+            $table->text('vars')->nullable();
+            $table->dateTime('sent_at')->nullable();
+            $table->string('template')->nullable();
             $table->string('key');
 
             $table->timestamps();

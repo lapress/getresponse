@@ -17,11 +17,14 @@ class CreateNewsletterTransationsTable extends Migration
             $table->uuid('uuid');
             $table->primary('uuid');
 
-            $table->unsignedInteger('newsletter_campaign_id')->index();
-            $table->unsignedInteger('provider_campaign_id')->index();
-            $table->string('provider_id');
+            $table->uuid('newsletter_campaign_id')->index();
+            $table->string('provider_id')->index();
             $table->boolean('test')->default(true);
+            $table->string('sender')->nullable();
             $table->string('provider_status')->nullable();
+            $table->integer('sent')->nullable();
+            $table->integer('total')->nullable();
+            $table->dateTime('sent_on')->nullable();
             $table->timestamps();
         });
 

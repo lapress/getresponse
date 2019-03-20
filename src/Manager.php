@@ -91,12 +91,12 @@ class Manager
      * @param NewsletterCampaign $campaign
      * @return mixed
      */
-    public function create(NewsletterCampaign $campaign)
+    public function create(NewsletterCampaign $campaign, string $body, string $providerId = null, bool $test = false)
     {
         $now = Carbon::now()->addMinutes(2);
         $sendOn = $now;
 
-        if ($campaign->sent_at && $campaign->sent_at->isFuture()) {
+        if ($campaign->sent_at && $campaign->sent_at->isFuture() && !$test) {
             $sendOn = $campaign->sent_at;
         }
 
@@ -105,19 +105,19 @@ class Manager
             'subject'      => $campaign->title,
             'editor'       => 'custom',
             'campaign'     => [
-                'campaignId' => $campaign->provider_id,
+                'campaignId' => $providerId ?: $campaign->provider_id,
             ],
             'sendOn'       => $sendOn->format('Y-m-d\TH:i:sO'),
             'fromField'    => [
                 'fromFieldId' => $campaign->sender,
             ],
             'content'      => [
-                'html'  => stripcslashes($campaign->body),
+                'html'  => stripcslashes($body),
                 'plain' => null,
             ],
             'flags'        => ['openrate', 'clicktrack', 'google_analytics'],
             'sendSettings' => [
-                'selectedCampaigns' => [$campaign->provider_id],
+                'selectedCampaigns' => [$providerId ?: $campaign->provider_id],
                 'timeTravel'        => (bool)$campaign->time_travel,
                 'perfectTiming'     => (bool)$campaign->perfect_timing,
             ],

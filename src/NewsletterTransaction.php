@@ -12,4 +12,24 @@ use Spatie\BinaryUuid\HasBinaryUuid;
 class NewsletterTransaction extends Model
 {
     use HasBinaryUuid;
+
+    protected $guarded = [];
+
+    protected $hidden = ['newsletter_campaign_id'];
+
+    protected $casts = [
+        'test' => 'boolean'
+    ];
+
+    /**
+     * Campaign
+     * Define a relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function campaign()
+    {
+        return $this->belongsTo(NewsletterCampaign::class, 'newsletter_campaign_id', 'newsletter_campaign_id');
+    }
+
 }
