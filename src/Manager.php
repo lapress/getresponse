@@ -84,7 +84,12 @@ class Manager
      */
     public function getSenders(): Collection
     {
-        return collect($this->client->getFromFields());
+        return collect($this->client->getFromFields())->map(function($sender){
+            return [
+                'name' => $sender->name.' ('.$sender->email.')',
+                'id'   => $sender->fromFieldId,
+            ];
+        });
     }
 
     /**
